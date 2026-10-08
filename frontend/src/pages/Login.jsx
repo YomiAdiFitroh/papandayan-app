@@ -30,22 +30,99 @@ export default function Login() {
   };
 
   return (
-    <div className="card">
-      <h1>Login</h1>
-      {location.state?.registered && (
-        <p className="success">Registration successful. Please log in.</p>
-      )}
-      <form onSubmit={onSubmit}>
-        <label>Email or username
-          <input name="identifier" value={form.identifier} onChange={onChange} required />
-        </label>
-        <label>Password
-          <input name="password" type="password" value={form.password} onChange={onChange} required />
-        </label>
-        {error && <p className="error">{error}</p>}
-        <button disabled={loading}>{loading ? 'Please wait...' : 'Login'}</button>
-      </form>
-      <p>No account yet? <Link to="/register">Register</Link></p>
+    <div className="login-page">
+      <div className="login-brand">
+        <div className="brand-mark">PC</div>
+    
+        <div>
+          <div className="brand-name">PAPANDAYAN CARGO</div>
+          <div className="brand-subtitle">Cargo Management System</div>
+        </div>
+      </div>
+    
+      <div className="login-content">
+        <div className="login-intro">
+          <div className="intro-line" />
+    
+          <h1>Sign in</h1>
+    
+          <p>
+            Access your account to manage cargo operations
+            and daily activities.
+          </p>
+        </div>
+    
+        <div className="login-form-wrapper">
+          <form onSubmit={onSubmit} className="login-form">
+            <div className="form-field">
+              <label htmlFor="identifier">
+                Email or username
+              </label>
+    
+              <input
+                id="identifier"
+                type="text"
+                value={form.identifier}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    identifier: e.target.value
+                  })
+                }
+                autoComplete="username"
+                disabled={loading}
+              />
+            </div>
+              
+            <div className="form-field">
+              <label htmlFor="password">
+                Password
+              </label>
+              
+              <input
+                id="password"
+                type="password"
+                value={form.password}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    password: e.target.value
+                  })
+                }
+                autoComplete="current-password"
+                disabled={loading}
+              />
+            </div>
+              
+            {error && (
+              <div className="login-error">
+                {error}
+              </div>
+            )}
+  
+            <button
+              type="submit"
+              className="login-button"
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
+          
+          <div className="login-footer">
+            <span>Don't have an account?</span>
+          
+            <Link to="/register">
+              Register
+            </Link>
+          </div>
+        </div>
+      </div>
+          
+      <div className="login-bottom">
+        <span>© Papandayan Cargo</span>
+        <span>Secure access</span>
+      </div>
     </div>
   );
 }
