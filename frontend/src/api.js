@@ -17,14 +17,14 @@ export const tokenStore = {
 
 const api = axios.create({ baseURL: API_URL });
 
-// Attach access token to every request
+// nyangkutin akses tokin setiap ada request
 api.interceptors.request.use((config) => {
   const token = tokenStore.access;
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// On 401, try ONE refresh, then retry the original request
+// Pas 401, nyobain sekali lagi refresh abis itu coba lagi buat permintaan riill no fek
 let refreshPromise = null;
 
 api.interceptors.response.use(
@@ -36,7 +36,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !original._retry && !isAuthCall && tokenStore.refresh) {
       original._retry = true;
       try {
-        // Share a single refresh call between concurrent failed requests
+        // Ngebagiin satu panggilan buat si refresh tunggal di antara ku dan besi (jk di antara permintaan gagal yang jalan barengan (ciee))
         refreshPromise =
           refreshPromise ||
           axios

@@ -20,7 +20,7 @@ export default function Users() {
     try {
       await api.post('/auth/logout', { refreshToken: tokenStore.refresh });
     } catch {
-      /* ignore, we clear locally anyway */
+      // gaada apa apa sih karena lokalan juga hehe ((JKJK))
     }
     tokenStore.clear();
     navigate('/login', { replace: true });
